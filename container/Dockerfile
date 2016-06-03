@@ -1,0 +1,23 @@
+FROM ubuntu:latest
+MAINTAINER Cerbo IO <support@cerbo.io>
+
+ENV DEBIAN_FRONTEND noninteractive
+ENV PATH=$PATH:/usr/local/scidb/bin
+RUN apt-get update ; \
+apt-get -y install python3 python3-pip libopenjpeg-dev python3-grib python3-netcdf4 openssh-server wget screen vim-nox ; \
+ln -s /usr/local/bin/python3 /usr/local/bin/python ; \
+pip3 install --upgrade pip ;\
+pip3 install scidb-py ; \
+sed -i 's/PermitRootLogin prohibit-password/PermitRootLogin yes/g' /etc/ssh/sshd_config ; \
+echo "root:scidb" | chpasswd ; \
+mkdir -p /usr/local/scidb/bin /usr/local/scidb/lib ; \
+mkdir -p /opt/scidb/15.12/3rdparty/cityhash/lib/
+
+COPY iquery /usr/local/scidb/bin/
+COPY usr-local-scidb-lib/* /usr/local/scidb/lib/
+COPY lib-x86_64-linux-gnu/* /lib/x86_64-linux-gnu/
+COPY libcityhash.so.0 /opt/scidb/15.12/3rdparty/cityhash/lib/
+COPY start-ssh /
+
+EXPOSE 22
+CMD ["/bin/bash"]
