@@ -2,16 +2,16 @@ FROM ubuntu:latest
 MAINTAINER Cerbo IO <support@cerbo.io>
 
 ENV DEBIAN_FRONTEND noninteractive
-ENV PATH=$PATH:/usr/local/scidb/bin
 RUN apt-get update ; \
 apt-get -y install python3 python3-pip libopenjpeg-dev python3-grib python3-netcdf4 openssh-server wget screen vim-nox ; \
-ln -s /usr/local/bin/python3 /usr/local/bin/python ; \
+ln -s /usr/bin/python3 /usr/local/bin/python ; \
 pip3 install --upgrade pip ;\
 pip3 install scidb-py ; \
 sed -i 's/PermitRootLogin prohibit-password/PermitRootLogin yes/g' /etc/ssh/sshd_config ; \
 echo "root:scidb" | chpasswd ; \
 mkdir -p /usr/local/scidb/bin /usr/local/scidb/lib ; \
-mkdir -p /opt/scidb/15.12/3rdparty/cityhash/lib/
+mkdir -p /opt/scidb/15.12/3rdparty/cityhash/lib/ ; \
+echo "export PATH=/usr/local/scidb/bin:$PATH" >> /root/.bashrc
 
 COPY iquery /usr/local/scidb/bin/
 COPY usr-local-scidb-lib/* /usr/local/scidb/lib/
