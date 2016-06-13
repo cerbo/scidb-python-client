@@ -13,7 +13,9 @@ Also:
 * openssh
 * wget
 * screen
+* git
 * vim
+* emacs
 
 # Help/Questions/Comments:
 For help or more info, feel free to contact us: support@cerbo.io (http://cerbo.io)
@@ -22,21 +24,27 @@ For help or more info, feel free to contact us: support@cerbo.io (http://cerbo.i
 ```
 docker run -it --rm=true cerbo/scidb-python-client
 ```
+This will get you a bash shell, where you can run iquery, python, etc.
 
-# How to run it as a service (access via ssh):
+# How to run it as a service (with access via ssh):
 ```
 CID=$(docker run --name=scidb-python-client -d cerbo/scidb-python-client /start-ssh)
-docker inspect --format '{{ .NetworkSettings.IPAddress }}' ${CID}
+```
+```
+IP=$(docker inspect --format '{{ .NetworkSettings.IPAddress }}' ${CID})
+```
 
-ssh root@{IP-from-above}
+```
+ssh root@$IP
 pass: scidb
 ```
 
-# How to run it IF you are using Weave:
+# How to run it IF you are using Weave or Cerbo's Grid/Mesh
 ```
 export DOCKER_HOST='unix:///var/run/weave/weave.sock'
 ```
 and then:
 ```
-docker run --name=scidb-python-client -d --net=none -e WEAVE_CIDR='$SUBNET/$CIDR' cerbo/scidb-python-client /start-ssh
+docker run --name=scidb-python-client -d -e WEAVE_CIDR='$GRID_IP/$CIDR' cerbo/scidb-python-client /start-ssh
 ```
+Similar to the standard service with ssh access, find out the IP address you received from your default docker bridge and ssh to that. From there, you will have access to the grid via the $GRID_IP
