@@ -3,7 +3,7 @@ MAINTAINER Cerbo IO <support@cerbo.io>
 
 ENV DEBIAN_FRONTEND noninteractive
 RUN apt-get update ; \
-apt-get -y install python3 python3-pip libopenjpeg-dev python3-grib python3-netcdf4 openssh-server wget screen vim-nox ; \
+apt-get -y install python3 python3-pip libopenjpeg-dev python3-grib python3-netcdf4 openssh-server wget git screen vim-nox emacs-nox ; \
 ln -s /usr/bin/python3 /usr/local/bin/python ; \
 pip3 install --upgrade pip ;\
 pip3 install scidb-py ; \
