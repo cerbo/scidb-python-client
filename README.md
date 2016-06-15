@@ -4,9 +4,11 @@ Production SciDB 15.12 Python 3.5 Client System (for standalone or cluster) by C
 
 It includes SciDB specifics:
 * python 3.5
+* ipython 3.5
 * python3-grib
 * python3-netcdf4
 * scidb-py
+* jupyter
 * iquery
 
 Also:
