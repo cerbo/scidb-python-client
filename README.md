@@ -7,6 +7,7 @@ It includes SciDB specifics:
 * ipython 3.5
 * python3-grib
 * python3-netcdf4
+* python3-pandas
 * scidb-py
 * jupyter
 * iquery
