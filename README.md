@@ -42,6 +42,14 @@ ssh root@$IP
 pass: scidb
 ```
 
+# How to run it IF you are using Cerbo's Grid/Mesh
+```
+docker run --name=scidb-python-client -d --net=XYZ --ip=A.B.C.D cerbo/scidb-python-client /start-ssh
+
+* replacece "XYZ" with your overlay or macvlan docker network
+* replace "A.B.C.D" with a valid and free IP from your "XYZ" network
+```
+
 # How to run it IF you are using Weave or Cerbo's Grid/Mesh
 ```
 export DOCKER_HOST='unix:///var/run/weave/weave.sock'
