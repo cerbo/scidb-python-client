@@ -3,6 +3,7 @@
 Production SciDB 15.12 Python 3.5 Client System (for standalone or cluster) by Cerbo.IO
 
 It includes SciDB specifics:
+* perl 5
 * python 3.5
 * ipython 3.5
 * python3-grib
