@@ -8,6 +8,10 @@ ln -s /usr/bin/python3 /usr/local/bin/python ; \
 pip3 install --upgrade pip ;\
 pip3 install scidb-py ; \
 pip3 install jupyter ; \
+git clone https://github.com/facebook/zstd.git ; \
+cd zstd ; \
+make && make install ; \
+cd ../ && rm -Rf zstd ; \
 sed -i 's/PermitRootLogin prohibit-password/PermitRootLogin yes/g' /etc/ssh/sshd_config ; \
 echo "root:scidb" | chpasswd ; \
 mkdir -p /usr/local/scidb/bin /usr/local/scidb/lib ; \
